@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build_to_repo": "ng build --output-path doc --base-href /itlogia_cookie_angular/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
