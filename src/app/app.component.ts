@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 
@@ -13,6 +13,14 @@ export class AppComponent {
   course = {"rub": 0, "byn": 0, "eur": 0, "cny": 0};
   // загружаем курсы валют
   ngOnInit() {
+
+    setTimeout(() => {
+      this.loaderShowed=false;
+    }, 2000);
+
+    setTimeout(() => {
+      this.loader=false;
+    }, 3000);
     // загружаем курсы валют
     this.http.get("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json")
       .subscribe((data: any) => {
@@ -27,12 +35,24 @@ export class AppComponent {
   currency = '$';
   productsData: any;
 
+  loader = true;
+  loaderShowed = true;
 
   form = this.fb.group({
     product: ['', Validators.required],
     name: ['', Validators.required],
     phone: ['', Validators.required],
   });
+
+  mainImageStyle: any;
+  orderImageStyle: any;
+ @HostListener("document:mousemove", ["$event"])
+  onMouseMove(e: MouseEvent) {
+    this.mainImageStyle = { transform: "translate(" + ((e.clientX * 0.3) / 8) + "px," + ((e.clientY * 0.3) / 8 ) + "px)"}
+   this.orderImageStyle = { transform: "translate(-" + ((e.clientX * 0.3) / 8) + "px,-" + ((e.clientY * 0.3) / 8 ) + "px)"}
+  }
+
+
   constructor(private fb: FormBuilder, private http: HttpClient) {}
  scrollTo(target : HTMLElement, product: any) {
     target.scrollIntoView({behavior: 'smooth'});

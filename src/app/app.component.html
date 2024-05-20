@@ -39,7 +39,7 @@
           </button>
         </div>
       </div>
-      <img src="./assets/images/cookie.png" alt="" class="main-image">
+      <img src="./assets/images/cookie.png" alt="" class="main-image" [ngStyle]="mainImageStyle">
     </div>
 
   </section>
@@ -126,7 +126,7 @@
           </div>
         </div>
         <div class="order-block-image">
-          <img src="./assets/images/order.png" alt="Cookies" class="order-image">
+          <img src="./assets/images/order.png" alt="Cookies" class="order-image" [ngStyle]="orderImageStyle" >
         </div>
       </div>
     </div>
@@ -139,3 +139,7 @@
     <div class="rights">«Все права защищены»</div>
   </footer>
 </main>
+
+<div class="loader" [class]="{'showed':loaderShowed}" *ngIf="loader">
+  <lottie-player src="./assets/cookies.json" background="transparent" speed="1.5" autoplay></lottie-player>
+</div>
